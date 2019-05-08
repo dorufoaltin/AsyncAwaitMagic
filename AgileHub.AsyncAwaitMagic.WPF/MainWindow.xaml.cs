@@ -1,7 +1,9 @@
 ﻿using AgileHub.AsyncAwaitMagic.Standard;
+using AgileHub.AsyncAwaitMagic.WPF.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -31,13 +33,16 @@ namespace AgileHub.AsyncAwaitMagic.WPF
         {
             RestClient restClient = new RestClient();
 
-            // Console.WriteLine($"Current thread id is: { Thread.CurrentThread.ManagedThreadId }");
+            var result = await restClient.Get<string>("http://asyncawaitmagic.azurewebsites.net/api/demo");
 
-            var result = await restClient.Get("http://asyncawaitmagic.azurewebsites.net/api/demo");
+            resultlabel.Text = result;
+        }
 
-            // Console.WriteLine($"Continuation thread id is: { Thread.CurrentThread.ManagedThreadId }");
+        private async void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            await ProcessHelpers.RunProcessAsync("C:\\Windows\\system32\\notepad.exe");
 
-            resultlabel.Text = await result.Content.ReadAsStringAsync();
+            MessageBox.Show("Notepad inchis!");
         }
     }
 }
