@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AgileHub.AsyncAwaitMagic.Xamarin"
+             x:Class="AgileHub.AsyncAwaitMagic.Xamarin.MainPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Button  Text="Magic 1" Clicked ="Button_Clicked_1"/>
+
+        <Button Grid.Row="2" Text="Magic 2" Clicked="Button_Clicked" />
+
+        <Label Grid.Row="1" Text="{Binding Result}"/>
+
+    </Grid>
+</ContentPage>

@@ -11,6 +11,8 @@ namespace AgileHub.AsyncAwaitMagic.WPF.Helpers
     {
         public static Task RunProcessAsync(string processPath)
         {
+            var tcs = new TaskCompletionSource<object>();
+
             var process = new Process
             {
                 EnableRaisingEvents = true,
@@ -23,12 +25,14 @@ namespace AgileHub.AsyncAwaitMagic.WPF.Helpers
 
             process.Exited += (sender, args) =>
             {
+                tcs.SetResult(new object());
+
                 process.Dispose();
             };
 
             process.Start();
 
-            return Task.CompletedTask;
+            return tcs.Task;
         }
     }
 }
