@@ -9,12 +9,9 @@ namespace AgileHub.AsyncAwaitMagic.WPF.Helpers
 {
     public static class SocketExtensions
     {
-        public static Task<Socket> AcceptAsync(this Socket socket)
+        public static Task<bool> AcceptAsync(this Socket socket)
         {
-            if (socket == null)
-                throw new ArgumentNullException("socket");
-
-            var tcs = new TaskCompletionSource<Socket>();
+            var tcs = new TaskCompletionSource<bool>();
 
             socket.BeginAccept(asyncResult =>
             {
@@ -23,7 +20,7 @@ namespace AgileHub.AsyncAwaitMagic.WPF.Helpers
                     var s = asyncResult.AsyncState as Socket;
                     var client = s.EndAccept(asyncResult);
 
-                    tcs.SetResult(client);
+                    tcs.SetResult(true);
                 }
                 catch (Exception ex)
                 {
