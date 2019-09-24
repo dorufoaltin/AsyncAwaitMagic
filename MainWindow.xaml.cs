@@ -26,24 +26,7 @@ namespace DeadLock
 
         readonly List<int> _allValues = Enumerable.Range(0, 9000000).ToList();
 
-        void ThreadJob()
-        {
-            Console.WriteLine("\t\t\t\tLocking firstLock");
-            lock (_firstLock)
-            {
-                Console.WriteLine("\t\t\t\tLocked firstLock");
-                // Wait until we're fairly sure the first thread
-                // has grabbed secondLock
-                Thread.Sleep(1000);
-                Console.WriteLine("\t\t\t\tLocking secondLock");
-                lock (_secondLock)
-                {
-                    Console.WriteLine("\t\t\t\tLocked secondLock");
-                }
-                Console.WriteLine("\t\t\t\tReleased secondLock");
-            }
-            Console.WriteLine("\t\t\t\tReleased firstLock");
-        }
+       
 
         public MainWindow()
         {
@@ -52,36 +35,47 @@ namespace DeadLock
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Task.Factory.StartNew(ThreadJob);
-
-            // Wait until we're fairly sure the other thread
-            // has grabbed firstLock
-            Thread.Sleep(500);
-            Console.WriteLine("Locking secondLock");
-            lock (_secondLock)
-            {
-                Console.WriteLine("Locked secondLock");
-                Console.WriteLine("Locking firstLock");
-                lock (_firstLock)
-                {
-                    Console.WriteLine("Locked firstLock");
-                }
-                Console.WriteLine("Released firstLock");
-            }
-            Console.WriteLine("Released secondLock");
+            Task.Factory.StartNew(ChickenThread);
+            Task.Factory.StartNew(EggThread);
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        void ChickenThread()
         {
-            Task.Factory.StartNew(AddNewNumber);
-
-            int sum = 0;
-
-            foreach (var item in _allValues)
+            lock (_firstLock)
             {
-                sum += item;
+                Thread.Sleep(1000);
+                lock (_secondLock)
+                {
+                }
+            }
+        }
 
-                Thread.Sleep(1);
+        private void EggThread()
+        {
+            Thread.Sleep(500);
+            lock (_secondLock)
+            {
+                lock (_firstLock)
+                {
+                }
+            }
+        }
+
+        void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < 1000; i++)
+            {
+                Task.Factory.StartNew(CodeWithLocks);
+            }
+        }
+
+        Object _lockObject = new object();
+
+        void CodeWithLocks()
+        {
+            lock (_lockObject)
+            {
+                // This code can be executed by a single Thread at a time
             }
         }
 
