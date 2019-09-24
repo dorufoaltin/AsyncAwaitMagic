@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgileHub.AsyncAwaitMagic.WP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgileHub.AsyncAwaitMagic.Standard", "AgileHub.AsyncAwaitMagic.Standard\AgileHub.AsyncAwaitMagic.Standard.csproj", "{98EF50D4-B7DB-4968-8C64-535CA862A5B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgileHub.AsyncAwaitMagic.Console", "AgileHub.AsyncAwaitMagic.Console\AgileHub.AsyncAwaitMagic.Console.csproj", "{76A10BC1-6C4E-44B2-B49B-61B15A41A2DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{98EF50D4-B7DB-4968-8C64-535CA862A5B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98EF50D4-B7DB-4968-8C64-535CA862A5B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98EF50D4-B7DB-4968-8C64-535CA862A5B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76A10BC1-6C4E-44B2-B49B-61B15A41A2DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76A10BC1-6C4E-44B2-B49B-61B15A41A2DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76A10BC1-6C4E-44B2-B49B-61B15A41A2DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76A10BC1-6C4E-44B2-B49B-61B15A41A2DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +38,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{A8C9CD9F-A93B-4DD4-AA3A-EC4DF08AFEF2} = {1D1A34D6-D60C-4CB6-A045-9DE6C4824319}
 		{98EF50D4-B7DB-4968-8C64-535CA862A5B9} = {DC6ABD02-279D-421C-838B-C677B8253071}
+		{76A10BC1-6C4E-44B2-B49B-61B15A41A2DF} = {1D1A34D6-D60C-4CB6-A045-9DE6C4824319}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CA27A82C-B996-4FF4-95B2-D80CF75CB3A8}
