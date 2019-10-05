@@ -9,7 +9,6 @@
     <DockPanel>
         <Button Content="Go to Dead Lock" DockPanel.Dock="Top" Height="25"  Click="Button_Click"/>
 
-        <Button Content="Crash due to Threading" DockPanel.Dock="Bottom"  Height="25" Click="Button_Click_1"/>
         <Grid/>
 
 

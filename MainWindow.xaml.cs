@@ -24,10 +24,6 @@ namespace DeadLock
         readonly object _firstLock = new object();
         readonly object _secondLock = new object();
 
-        readonly List<int> _allValues = Enumerable.Range(0, 9000000).ToList();
-
-       
-
         public MainWindow()
         {
             InitializeComponent();
@@ -41,7 +37,9 @@ namespace DeadLock
 
         void ChickenThread()
         {
-            lock (_firstLock)
+            Thread.CurrentThread.Name = "Chicken Thread";
+
+            lock (_firstLock) 
             {
                 Thread.Sleep(1000);
                 lock (_secondLock)
@@ -52,37 +50,16 @@ namespace DeadLock
 
         private void EggThread()
         {
-            Thread.Sleep(500);
+            Thread.CurrentThread.Name = "Egg Thread";
+
+            Thread.Sleep(500); // Egg Thread is Lazy
+
             lock (_secondLock)
             {
                 lock (_firstLock)
                 {
                 }
             }
-        }
-
-        void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            for (int i = 0; i < 1000; i++)
-            {
-                Task.Factory.StartNew(CodeWithLocks);
-            }
-        }
-
-        Object _lockObject = new object();
-
-        void CodeWithLocks()
-        {
-            lock (_lockObject)
-            {
-                // This code can be executed by a single Thread at a time
-            }
-        }
-
-        private void AddNewNumber()
-        {
-            Thread.Sleep(100);
-            _allValues.Add(2);
         }
     }
 }
