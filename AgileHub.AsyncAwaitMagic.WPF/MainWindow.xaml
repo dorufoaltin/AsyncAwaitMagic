@@ -7,7 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <DockPanel>
-        <Button DockPanel.Dock="Top" Height="25" Content="Demo1"   Click="Button_Click"/>
+        <Button DockPanel.Dock="Top" Height="25" Margin="0,10,0,0" Content="WPF Synchronization  Context"   Click="WpfContext_Click"/>
+        <Button DockPanel.Dock="Top" Height="25" Name="newThread" Content="New Thread per call Synchronization  Context"   Click="NewThreadContext_Click"/>
+        <Button DockPanel.Dock="Top" Height="25" Name="singleThreaded" Content="Single Threaded Synchronization  Context"   Click="SingleThreadedContext_Click"/>
+        <Button DockPanel.Dock="Top" Height="25" Name="multiThreaded" Content="Multi Threaded Synchronization  Context"   Click="MultiThreadedContext_Click"/>
         <TextBlock Name="resultlabel" DockPanel.Dock="Top" />
     </DockPanel>
 </Window>

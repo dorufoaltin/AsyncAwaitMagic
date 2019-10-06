@@ -27,17 +27,60 @@ namespace AgileHub.AsyncAwaitMagic.WPF
             InitializeComponent();
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private async Task<string> GetDemoText()
         {
             RestClient restClient = new RestClient();
 
-            // Console.WriteLine($"Current thread id is: { Thread.CurrentThread.ManagedThreadId }");
-
             var result = await restClient.Get("http://asyncawaitmagic.azurewebsites.net/api/demo");
 
-            // Console.WriteLine($"Continuation thread id is: { Thread.CurrentThread.ManagedThreadId }");
+            return await result.Content.ReadAsStringAsync();
+        }
 
-            resultlabel.Text = await result.Content.ReadAsStringAsync();
+        private async void WpfContext_Click(object sender, RoutedEventArgs e)
+        {
+            var result = await GetDemoText();
+
+            //var result = GetDemoText().Result;
+
+            Console.WriteLine($"Demo text: { result }, using the context: { SynchronizationContext.Current.GetType().Name }");
+        }
+
+        private async void SingleThreadedContext_Click(object sender, RoutedEventArgs e)
+        {
+            SynchronizationContext.SetSynchronizationContext(new SingleThreadSynchronizationContext());
+
+            var result = await GetDemoText();
+
+            //await Task.Delay(1); // - add this await so we change the current unit of code execution to a thread from SingleThreadSynchronizationContext
+            //var result = GetDemoText().Result;
+
+            Console.WriteLine($"Demo text: { result }, using the context: { SynchronizationContext.Current.GetType().Name }");
+        }
+
+        private async void MultiThreadedContext_Click(object sender, RoutedEventArgs e)
+        {
+            SynchronizationContext.SetSynchronizationContext(new MultiThreadedSynchronizationContext(3));
+
+            var result = await GetDemoText();
+
+            //await Task.Delay(1); // - add this await so we change the current unit of code execution to a thread from MultiThreadedSynchronizationContext
+            //var result = GetDemoText().Result;
+
+            Console.WriteLine($"Demo text: { result }, using the context: { SynchronizationContext.Current.GetType().Name }");
+        }
+
+        private async void NewThreadContext_Click(object sender, RoutedEventArgs e)
+        {
+            SynchronizationContext.SetSynchronizationContext(new NewThreadPerActionSynchronizationContext());
+
+            var result = await GetDemoText();
+
+            //await Task.Delay(1); - add this await so we change the current unit of code execution to a thread from NewThreadPerActionSynchronizationContext
+            //var result = GetDemoText().Result;
+
+            Console.WriteLine($"Demo text: { result }, using the context: { SynchronizationContext.Current.GetType().Name }");
+
+            SynchronizationContext.SetSynchronizationContext(null);
         }
     }
 }
