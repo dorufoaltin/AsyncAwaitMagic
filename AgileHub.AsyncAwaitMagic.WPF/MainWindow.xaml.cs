@@ -1,6 +1,7 @@
 ﻿using AgileHub.AsyncAwaitMagic.Standard;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -22,6 +23,10 @@ namespace AgileHub.AsyncAwaitMagic.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        SingleThreadSynchronizationContext _singleThreadSyncContext = new SingleThreadSynchronizationContext();
+        MultiThreadedSynchronizationContext _multiThreadSyncContext = new MultiThreadedSynchronizationContext(3);
+        NewThreadPerActionSynchronizationContext _newThreadPerActionSyncContext = new NewThreadPerActionSynchronizationContext();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -47,7 +52,7 @@ namespace AgileHub.AsyncAwaitMagic.WPF
 
         private async void SingleThreadedContext_Click(object sender, RoutedEventArgs e)
         {
-            SynchronizationContext.SetSynchronizationContext(new SingleThreadSynchronizationContext());
+            SynchronizationContext.SetSynchronizationContext(_singleThreadSyncContext);
 
             var result = await GetDemoText();
 
@@ -59,7 +64,7 @@ namespace AgileHub.AsyncAwaitMagic.WPF
 
         private async void MultiThreadedContext_Click(object sender, RoutedEventArgs e)
         {
-            SynchronizationContext.SetSynchronizationContext(new MultiThreadedSynchronizationContext(3));
+            SynchronizationContext.SetSynchronizationContext(_multiThreadSyncContext);
 
             var result = await GetDemoText();
 
@@ -71,7 +76,7 @@ namespace AgileHub.AsyncAwaitMagic.WPF
 
         private async void NewThreadContext_Click(object sender, RoutedEventArgs e)
         {
-            SynchronizationContext.SetSynchronizationContext(new NewThreadPerActionSynchronizationContext());
+            SynchronizationContext.SetSynchronizationContext(_newThreadPerActionSyncContext);
 
             var result = await GetDemoText();
 
@@ -81,6 +86,14 @@ namespace AgileHub.AsyncAwaitMagic.WPF
             Console.WriteLine($"Demo text: { result }, using the context: { SynchronizationContext.Current.GetType().Name }");
 
             SynchronizationContext.SetSynchronizationContext(null);
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            _multiThreadSyncContext.Stop().Wait();
+            _singleThreadSyncContext.Stop().Wait();
+
+            base.OnClosing(e);
         }
     }
 }

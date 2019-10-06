@@ -11,6 +11,7 @@ namespace AgileHub.AsyncAwaitMagic.WPF
     class SingleThreadSynchronizationContext : SynchronizationContext
     {
         private BlockingCollection<Action> _allActionsBlockingCollection;
+        private Task _executeActionTask;
 
         public bool IsRunning { get; private set; }
 
@@ -25,12 +26,14 @@ namespace AgileHub.AsyncAwaitMagic.WPF
 
             IsRunning = true;
 
-            Task.Factory.StartNew(ExecuteActionsThread_Run, TaskCreationOptions.LongRunning);
+            _executeActionTask = Task.Factory.StartNew(ExecuteActionsThread_Run, TaskCreationOptions.LongRunning);
         }
 
-        private void Stop()
+        public Task Stop()
         {
             _allActionsBlockingCollection.CompleteAdding();
+
+            return _executeActionTask;
         }
 
         private void ExecuteActionsThread_Run()

@@ -39,9 +39,11 @@ namespace AgileHub.AsyncAwaitMagic.WPF
             }
         }
 
-        private void Stop()
+        public Task Stop()
         {
             _allActionsBlockingCollection.CompleteAdding();
+
+            return Task.WhenAll(_allTasks);
         }
 
         private void ExecuteActionsThread_Run()
