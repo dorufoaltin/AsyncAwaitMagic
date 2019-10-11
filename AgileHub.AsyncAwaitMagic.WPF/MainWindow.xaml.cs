@@ -26,6 +26,7 @@ namespace AgileHub.AsyncAwaitMagic.WPF
         SingleThreadSynchronizationContext _singleThreadSyncContext = new SingleThreadSynchronizationContext();
         MultiThreadedSynchronizationContext _multiThreadSyncContext = new MultiThreadedSynchronizationContext(3);
         NewThreadPerActionSynchronizationContext _newThreadPerActionSyncContext = new NewThreadPerActionSynchronizationContext();
+        ExerciseSynchronizationContext _exerciseSynchronizationContext = new ExerciseSynchronizationContext();
 
         public MainWindow()
         {
@@ -93,7 +94,17 @@ namespace AgileHub.AsyncAwaitMagic.WPF
             _multiThreadSyncContext.Stop().Wait();
             _singleThreadSyncContext.Stop().Wait();
 
+            // TODO5: uncomment this line
+            //_exerciseSynchronizationContext.Stop().Wait();
+
             base.OnClosing(e);
+        }
+
+        private void Exercise_Click(object sender, RoutedEventArgs e)
+        {
+            SynchronizationContext.SetSynchronizationContext(_exerciseSynchronizationContext);
+
+            // TODO 0: call .Result to enter the DeadLock in here
         }
     }
 }

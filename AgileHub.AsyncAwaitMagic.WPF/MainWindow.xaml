@@ -11,6 +11,7 @@
         <Button DockPanel.Dock="Top" Height="25" Name="newThread" Content="New Thread per call Synchronization  Context"   Click="NewThreadContext_Click"/>
         <Button DockPanel.Dock="Top" Height="25" Name="singleThreaded" Content="Single Threaded Synchronization  Context"   Click="SingleThreadedContext_Click"/>
         <Button DockPanel.Dock="Top" Height="25" Name="multiThreaded" Content="Multi Threaded Synchronization  Context"   Click="MultiThreadedContext_Click"/>
+        <Button DockPanel.Dock="Top" Height="25" Name="Exercise" Content="Exercise  Context"   Click="Exercise_Click"/>
         <TextBlock Name="resultlabel" DockPanel.Dock="Top" />
     </DockPanel>
 </Window>

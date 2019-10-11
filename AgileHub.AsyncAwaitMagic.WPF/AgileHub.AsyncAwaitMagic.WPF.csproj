@@ -63,6 +63,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ExerciseSynchronizationContext.cs" />
     <Compile Include="MultiThreadedSynchronizationContext.cs" />
     <Compile Include="NewThreadPerActionSynchronizationContext.cs" />
     <Compile Include="SingleThreadSynchronizationContext.cs" />
