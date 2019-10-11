@@ -95,9 +95,9 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AgileHub.AsyncAwaitMagic.Xamarin\AgileHub.AsyncAwaitMagic.Xamarin.csproj">
-      <Project>{7E261145-4B97-483D-BEB8-6580D67EB29B}</Project>
-      <Name>AgileHub.AsyncAwaitMagic.Xamarin</Name>
+    <ProjectReference Include="..\AgileHub.AsyncAwaitMagic.Xamarin\AgileHub.AsyncAwaitMagic.Xamarin.Forms.csproj">
+      <Project>{1A98790D-860E-437A-B7FA-EB971014A7DD}</Project>
+      <Name>AgileHub.AsyncAwaitMagic.Xamarin.Forms</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

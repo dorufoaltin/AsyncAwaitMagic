@@ -18,9 +18,9 @@ namespace AgileHub.AsyncAwaitMagic.AspNetCoreMvc.Controllers
 
         public IActionResult Privacy()
         {
-            DemoService service = new DemoService();
+            RestClient restClient = new RestClient();
 
-            var saveResult = service.SaveNewDemoTextSyncHack("someValue");
+            var result = restClient.Get("http://asyncawaitmagic.azurewebsites.net/api/demo").Result;
 
             return View();
         }

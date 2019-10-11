@@ -15,11 +15,11 @@ namespace AgileHub.AsyncAwaitMagic.AspNetCoreWebApi.Controllers
         [HttpGet]
         public string Get()
         {
-            DemoService service = new DemoService();
+            RestClient restClient = new RestClient();
 
-            var saveResult = service.SaveNewDemoTextSyncHack("someValue");
+            var result = restClient.Get("http://asyncawaitmagic.azurewebsites.net/api/demo").Result;
 
-            return $"Reached the end with result: {saveResult}!";
+            return $"Reached the end with result: {result.StatusCode.ToString()}!";
         }
     }
 }

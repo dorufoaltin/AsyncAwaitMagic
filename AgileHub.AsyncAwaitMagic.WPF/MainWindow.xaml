@@ -8,9 +8,5 @@
         Title="MainWindow" Height="450" Width="800">
     <DockPanel>
         <Button DockPanel.Dock="Top" Height="25" Content="Demo1"   Click="Button_Click"/>
-        <TextBlock Name="resultlabel" DockPanel.Dock="Top" />
-
-        <Button DockPanel.Dock="Bottom" Height="25" Content="Deschide Notepad"  Click="Button_Click_1"/>
-        <TextBlock  DockPanel.Dock="Top" />
     </DockPanel>
 </Window>

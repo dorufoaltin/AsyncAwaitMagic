@@ -11,9 +11,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Button  Text="Magic 1" Clicked ="Button_Clicked_1"/>
-
-        <Button Grid.Row="2" Text="Magic 2" Clicked="Button_Clicked" />
+        <Button  Text="Demo" Clicked ="Button_Clicked_1"/>
 
         <Label Grid.Row="1" Text="{Binding Result}"/>
 

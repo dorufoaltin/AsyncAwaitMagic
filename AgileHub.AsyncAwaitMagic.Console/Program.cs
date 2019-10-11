@@ -11,14 +11,11 @@ namespace AgileHub.AsyncAwaitMagic.Console
     {
         static void Main(string[] args)
         {
-            DemoService service = new DemoService();
+            RestClient restClient = new RestClient();
 
-            var saveResult = service.SaveNewDemoTextSyncHack("someValue");
+            var result = restClient.Get("http://asyncawaitmagic.azurewebsites.net/api/demo").Result;
 
-            if (saveResult)
-                return;
-
-            System.Console.WriteLine(saveResult);
+            System.Console.WriteLine(result.StatusCode);
 
             System.Console.ReadLine();
         }

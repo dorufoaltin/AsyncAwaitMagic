@@ -20,48 +20,9 @@ namespace AgileHub.AsyncAwaitMagic.WinForms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DemoService service = new DemoService();
+            RestClient restClient = new RestClient();
 
-            var saveResult = service.SaveNewDemoTextSyncHack("someValue");
-
-            if (saveResult)
-                return;
-
-            MessageBox.Show($"Reached the end with result: {saveResult}!");
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            bool saveResult = false;
-
-            var task = Task.Factory.StartNew(() =>
-            {
-                DemoService service = new DemoService();
-
-                saveResult = service.SaveNewDemoTextSyncHack("someValue");
-
-                if (saveResult)
-                    return;
-            });
-
-            task.Wait();
-
-            MessageBox.Show($"Reached the end with result: {saveResult}!");
+            var result = restClient.Get("http://asyncawaitmagic.azurewebsites.net/api/demo").Result;
         }
     }
 }

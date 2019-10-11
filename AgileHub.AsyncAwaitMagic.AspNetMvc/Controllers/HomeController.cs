@@ -23,11 +23,11 @@ namespace AgileHub.AsyncAwaitMagic.AspNetMvc.Controllers
 
         public ActionResult Contact()
         {
-            DemoService service = new DemoService();
+            RestClient restClient = new RestClient();
 
-            var saveResult = service.SaveNewDemoTextSyncHack("someValue");
+            var result = restClient.Get("http://asyncawaitmagic.azurewebsites.net/api/demo").Result;
 
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = result.StatusCode.ToString();
 
             return View();
         }

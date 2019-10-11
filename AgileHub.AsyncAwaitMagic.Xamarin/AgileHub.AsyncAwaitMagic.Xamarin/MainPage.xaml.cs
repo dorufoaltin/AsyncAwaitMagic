@@ -35,33 +35,11 @@ namespace AgileHub.AsyncAwaitMagic.Xamarin
         
         private void Button_Clicked_1(object sender, EventArgs e)
         {
-            DemoService service = new DemoService();
+            RestClient restClient = new RestClient();
 
-            var saveResult = service.SaveNewDemoTextSyncHack("someValue");
+            var result = restClient.Get("http://asyncawaitmagic.azurewebsites.net/api/demo").Result;
 
-            if (saveResult)
-                return;
-
-            Result = $"Reached the end with result: {saveResult}!";
-        }
-
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-            bool saveResult = false;
-
-            var task = Task.Factory.StartNew(() =>
-            {
-                DemoService service = new DemoService();
-
-                saveResult = service.SaveNewDemoTextSyncHack("someValue");
-
-                if (saveResult)
-                    return;
-            });
-
-            task.Wait();
-
-            Result = $"Reached the end with result: {saveResult}!";
+            Result = $"Reached the end with result: {result.StatusCode}!";
         }
     }
 }

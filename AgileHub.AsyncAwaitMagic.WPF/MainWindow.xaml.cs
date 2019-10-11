@@ -1,5 +1,4 @@
 ﻿using AgileHub.AsyncAwaitMagic.Standard;
-using AgileHub.AsyncAwaitMagic.WPF.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,34 +23,6 @@ namespace AgileHub.AsyncAwaitMagic.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        private string _demoProperty;
-
-        public string DemoProperty
-        {
-            get { return _demoProperty; }
-            set
-            {
-                RestClient restClient = new RestClient();
-
-                var postResult = restClient.Post<string>(value, "http://asyncawaitmagic.azurewebsites.net/api/demo").Result;
-
-                if (!postResult.IsSuccessStatusCode)
-                    return;
-
-                _demoProperty = value;
-
-                //DemoService service = new DemoService();
-
-                //var result = service.SaveNewDemoTextSyncHack(value);
-
-                //if (!result)
-                //    return;
-
-
-                //_demoProperty = value;
-            }
-        }
-
         public MainWindow()
         {
             InitializeComponent();
@@ -59,19 +30,9 @@ namespace AgileHub.AsyncAwaitMagic.WPF
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            DemoProperty = "5";
-        }
+            RestClient restClient = new RestClient();
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            RunProcessAsync("C:\\Windows\\system32\\notepad.exe").Wait();
-
-            MessageBox.Show("Notepad inchis!");
-        }
-
-        private async Task RunProcessAsync(string processName)
-        {
-            await ProcessHelpers.RunProcessAsync(processName);
+            var result = restClient.Get("http://asyncawaitmagic.azurewebsites.net/api/demo").Result;
         }
     }
 }

@@ -31,33 +31,11 @@ namespace AgileHub.AsyncAwaitMagic.UWP
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            DemoService service = new DemoService();
+            RestClient restClient = new RestClient();
 
-            var saveResult = service.SaveNewDemoTextSyncHack("someValue");
+            var result = restClient.Get("http://asyncawaitmagic.azurewebsites.net/api/demo").Result;
 
-            if (saveResult)
-                return;
-
-            txtResult.Text =  $"Reached the end with result: {saveResult}!";
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            bool saveResult = false;
-
-            var task = Task.Factory.StartNew(() =>
-            {
-                DemoService service = new DemoService();
-
-                saveResult = service.SaveNewDemoTextSyncHack("someValue");
-
-                if (saveResult)
-                    return;
-            });
-
-            task.Wait();
-
-            txtResult.Text =  $"Reached the end with result: {saveResult}!";
+            txtResult.Text =  $"Reached the end with result: {result.StatusCode}!";
         }
     }
 }

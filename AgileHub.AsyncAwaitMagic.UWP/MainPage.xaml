@@ -15,9 +15,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Button Height="35" Content="Magic 1" HorizontalAlignment="Stretch" Click="Button_Click"/>
-
-        <Button Grid.Row="2" Height="35" HorizontalAlignment="Stretch" Content="Magic 2" Click="Button_Click_1"/>
+        <Button Height="35" Content="Demo" HorizontalAlignment="Stretch" Click="Button_Click"/>
 
         <TextBlock Name="txtResult" Grid.Row="1"/>
 

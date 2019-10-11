@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgileHub.AsyncAwaitMagic.Xa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgileHub.AsyncAwaitMagic.Xamarin.iOS", "AgileHub.AsyncAwaitMagic.Xamarin\AgileHub.AsyncAwaitMagic.Xamarin.iOS\AgileHub.AsyncAwaitMagic.Xamarin.iOS.csproj", "{A9BBA76E-57C1-4386-97C8-261C520AD7C3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgileHub.AsyncAwaitMagic.Xamarin", "AgileHub.AsyncAwaitMagic.Xamarin\AgileHub.AsyncAwaitMagic.Xamarin\AgileHub.AsyncAwaitMagic.Xamarin.csproj", "{1A98790D-860E-437A-B7FA-EB971014A7DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgileHub.AsyncAwaitMagic.Xamarin.Forms", "AgileHub.AsyncAwaitMagic.Xamarin\AgileHub.AsyncAwaitMagic.Xamarin\AgileHub.AsyncAwaitMagic.Xamarin.Forms.csproj", "{1A98790D-860E-437A-B7FA-EB971014A7DD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NetCore", "NetCore", "{8FE75996-27AB-44A5-A11F-62827E2D9205}"
 EndProject
